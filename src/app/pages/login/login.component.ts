@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import {LoginData} from './login.model';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  userName:string="";
+  password:string="";
+  loginForm:FormGroup;
+  constructor(private formBuilder:FormBuilder) { 
+    this.loginForm=this.formBuilder.group({
+      userName:'',
+      password:''
+    })
+  }
 
   ngOnInit(): void {
   }
 
+  signIn(formData:LoginData){
+    this.userName=formData.userName;
+    this.password=formData.password;
+    console.log(formData);
+    
+  }
 }

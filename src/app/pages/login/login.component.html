@@ -1,1 +1,27 @@
-<p>login works!</p>
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm">  <!-- Reactive Form  [formGroup]="loginForm" -->
+      <input type="text" formControlName="userName" id="login" class="fadeIn second" name="login" placeholder="username"> <!-- Reactive Form  formControlName="userName" -->
+      <input type="password" formControlName="password" id="password" class="fadeIn third" name="login" placeholder="password">
+      <Input type="button" class="fadeIn fourth"  (click)="signIn(loginForm.value)" value="Login"><!-- Reactive Form  (click)="signIn(loginForm.value)" -->
+    </form>
+
+    username : {{userName}}
+    password : {{password}}
+
+
+  </div>
+</div>
