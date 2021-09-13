@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { LoginComponent } from 'src/app/pages/login/login.component';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor() { }
+  signUpModalRef:BsModalRef = new BsModalRef()
+  constructor(private modalService:BsModalService) { }
 
   ngOnInit(): void {
   }
 
+  SignInModal(){
+    this.signUpModalRef=this.modalService.show(LoginComponent,{class:'modal-sm'})
+  }
 }
