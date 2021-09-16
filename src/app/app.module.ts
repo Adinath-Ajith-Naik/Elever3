@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './shared/layout/navigation-bar/navigation-bar.component';
-import { HomeComponent } from './pages/home/home.component';
-import { UploadImageComponent } from './pages/upload-image/upload-image.component';
-import { LoginComponent } from './pages/login/login.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { MyCollectionsComponent } from './pages/my-collections/my-collections.component';
-import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './pages/home/home.component';
+import { InfoComponent } from './pages/info/info.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MyCollectionsComponent } from './pages/my-collections/my-collections.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { UploadImageComponent } from './pages/upload-image/upload-image.component';
+import { NavigationBarComponent } from './shared/layout/navigation-bar/navigation-bar.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     UploadImageComponent,
     LoginComponent,
     ProfileComponent,
-    MyCollectionsComponent
+    MyCollectionsComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
+    ToastrModule.forRoot()
 
   ],
   providers: [],

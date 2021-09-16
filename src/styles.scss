@@ -1,7 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import '~ngx-toastr/toastr';
+
 /* Importing Bootstrap SCSS file. */
+
 @import "~bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
+
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+body {
+    background-image: url(../src/assets/images/bg-img4.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.icon-font {
+    color: #FFB45C;
+    font-family: Monoton;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.toast-top-right {
+    top: 80px;
+    right: 12px;
+}

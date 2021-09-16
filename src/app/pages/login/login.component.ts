@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginData } from './login.model';
 
 @Component({
@@ -9,12 +10,13 @@ import { LoginData } from './login.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  userName: string = '';
-  password: string = '';
+  userName: any = '';
+  password: any = '';
   loginForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
-    public signUpModalRef: BsModalRef
+    private router: Router,
+    private toast: ToastrService // public signUpModalRef: BsModalRef
   ) {
     this.loginForm = this.formBuilder.group({
       userName: '',
@@ -25,11 +27,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   signIn(formData: LoginData) {
-    this.userName = formData.userName;
-    this.password = formData.password;
+    this.userName = localStorage.getItem('username')
+      ? localStorage.getItem('username')
+      : 'mbcet';
+    this.password = localStorage.getItem('password')
+      ? localStorage.getItem('password')
+      : 'mbcet';
+    // this.userName = formData.userName;
+    // this.password = formData.password;
     console.log(formData);
+    if (
+      this.userName === formData.userName &&
+      this.password === formData.password
+    ) {
+      this.router.navigate(['/home']);
+      this.toast.success('Welcome ' + this.userName, 'Login Success!');
+    } else {
+      this.toast.error('Incorrect username and password', 'Login Failed!');
+    }
   }
-  close() {
-    this.signUpModalRef.hide();
-  }
+  // close() {
+  //   this.signUpModalRef.hide();
+  // }
 }
