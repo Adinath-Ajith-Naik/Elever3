@@ -12,6 +12,7 @@ export class InfoComponent implements OnInit {
   ngOnInit(): void {
     localStorage.setItem('username','mbcet');
     localStorage.setItem('password','mbcet');
+    localStorage.setItem('login','false');
   }
 
 }

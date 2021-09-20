@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Posts } from 'src/app/Models/posts/posts.model';
+import { UploadImageComponent } from '../upload-image/upload-image.component';
+import { ViewImageComponent } from '../view-image/view-image.component';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +12,13 @@ import { Posts } from 'src/app/Models/posts/posts.model';
 export class ProfileComponent implements OnInit {
   username: string | null = '';
   posts: Posts[] = [] as Posts[];
-  constructor() {
+  bsModalRef!:BsModalRef
+  uploadModalRef!:BsModalRef
+  
+
+  constructor(
+  private bsModalService:BsModalService
+  ) {
     this.username = localStorage.getItem('username')
       ? localStorage.getItem('username')
       : null;
@@ -68,4 +77,13 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  showImg(post:Posts){
+    var initialState={
+      post:post
+    }
+    this.bsModalRef=this.bsModalService.show(ViewImageComponent,{initialState})
+  }
+  uploadImg(){
+    this.uploadModalRef=this.bsModalService.show(UploadImageComponent)
+  }
 }

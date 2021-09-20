@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LoginService } from 'src/app/services/login.service';
 import { LoginData } from './login.model';
 
 @Component({
@@ -16,8 +17,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private toast: ToastrService // public signUpModalRef: BsModalRef
+    private toast: ToastrService, // public signUpModalRef: BsModalRef
+    private loginService: LoginService
   ) {
+    localStorage.setItem('login', 'login');
     this.loginForm = this.formBuilder.group({
       userName: '',
       password: '',
@@ -27,28 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   signIn(formData: LoginData) {
-    this.userName = localStorage.getItem('username')
-      ? localStorage.getItem('username')
-      : 'mbcet';
-    this.password = localStorage.getItem('password')
-      ? localStorage.getItem('password')
-      : 'mbcet';
-    // this.userName = formData.userName;
-    // this.password = formData.password;
-    console.log(formData);
-    if (
-      this.userName === formData.userName &&
-      this.password === formData.password
-    ) {
-      this.router.navigate(['/home']);
-      this.toast.success('Welcome ' + this.userName, 'Login Success!');
-    } else if((formData.userName==="")||(formData.userName===null)&&(formData.password==="")||(formData.password===null)) {
-      this.toast.error('Username or Password Cannot Be Empty', 'Login Failed!');
-    }
-    else{
-      this.toast.error('Incorrect Username and Password', 'Login Failed!');
-      
-    }
+    var login: boolean = this.loginService.logIn(formData);
+    console.log(login);
+    
   }
   // close() {
   //   this.signUpModalRef.hide();

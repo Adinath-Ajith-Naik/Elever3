@@ -1,7 +1,28 @@
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+<div class="modal-dialog modal-xl mt-0">
+    <div class="modal-content">
+        <div class="modal-header pull-left">
+            <span class="modal-title ">
+                <h4 id="dialog-sizes-name1" >{{post.userName}}</h4>
+                <h6 id="dialog-sizes-name1" >{{post.location}}</h6>
+            </span>
+            <button type="button" class="close pull-right" aria-label="Close" (click)=" hideModal()">
+          &times;</button>
+        </div>
 
+        <div class="modal-body">
+            <div class="row" style="text-align: center;">
+                <div class="col-12 mb-2">
+                    <img [src]="post.imageUrl" height="400px" width="450px" class="shadow" />
+                </div>
+                <div class="col-12 ml-1 " style="text-align: left ;">
+
+                </div>
+                <div class="col-12 ml-1 " style="text-align: left ;">
+                    <i class="far fa-comment-smile"></i> {{post.caption}}.
+                    <span class="fas fa-heart text-danger"></span> {{post.likes}} Likes.
+                    <span class="uil uil-share ml-1"></span> Share.
+                </div>
+            </div>
         </div>
     </div>
 </div>

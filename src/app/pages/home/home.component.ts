@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Filter } from 'src/app/Models/Filters/filters.model';
 import { Posts } from 'src/app/Models/posts/posts.model';
 
@@ -56,7 +57,9 @@ export class HomeComponent implements OnInit {
   ];
   selectedFilter: string[] = [];
 
-  constructor() {
+  constructor(
+    
+  ) {
     // this.post = {
     //   userName: 'amalmohann',
     //   imageUrl: '../../.../../../assets/images/image1.jfif',

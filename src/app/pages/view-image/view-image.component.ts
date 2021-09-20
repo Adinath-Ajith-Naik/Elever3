@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Posts } from 'src/app/Models/posts/posts.model';
 
 @Component({
   selector: 'app-view-image',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-image.component.scss']
 })
 export class ViewImageComponent implements OnInit {
+  post!:Posts
+  
+  constructor(
+    private bsModalRef:BsModalRef
+  ) { 
 
-  constructor() { }
+  }
 
   ngOnInit(): void {
+    console.log(this.post);
+    
+  }
+  hideModal(){
+    this.bsModalRef.hide()
   }
 
 }
