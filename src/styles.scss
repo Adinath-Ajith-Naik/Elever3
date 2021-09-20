@@ -10,15 +10,6 @@
 /* Importing Datepicker SCSS file. */
 
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
-body {
-    background-image: url(../src/assets/images/bg-img4.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .icon-font {
     color: #FFB45C;
     font-family: Monoton;
@@ -29,4 +20,37 @@ body {
 .toast-top-right {
     top: 80px;
     right: 12px;
+}
+
+footer {
+    /*background-color: blue; */
+    background-color: rgba(27, 26, 26, 0.644);
+    color: white;
+    height: 180px;
+    text-align: center;
+}
+
+.info {
+    display: flex;
+    justify-content: center;
+}
+
+.info i {
+    font-size: 25px;
+}
+
+.goto {
+    color: white;
+    display: inline-block;
+    padding: 0px 5px;
+}
+
+.goto:hover {
+    color: rgb(104, 100, 97);
+}
+
+.p {
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
 }

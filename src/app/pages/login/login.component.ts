@@ -42,8 +42,12 @@ export class LoginComponent implements OnInit {
     ) {
       this.router.navigate(['/home']);
       this.toast.success('Welcome ' + this.userName, 'Login Success!');
-    } else {
-      this.toast.error('Incorrect username and password', 'Login Failed!');
+    } else if((formData.userName==="")||(formData.userName===null)&&(formData.password==="")||(formData.password===null)) {
+      this.toast.error('Username or Password Cannot Be Empty', 'Login Failed!');
+    }
+    else{
+      this.toast.error('Incorrect Username and Password', 'Login Failed!');
+      
     }
   }
   // close() {

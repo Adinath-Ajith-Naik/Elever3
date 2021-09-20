@@ -20,6 +20,7 @@ const routes: Routes = [
   },
   { path: 'sign-in', component: LoginComponent },
   { path: 'info', component: InfoComponent },
+  { path: '**', redirectTo:'/info',pathMatch:'full' },
 ];
 
 @NgModule({

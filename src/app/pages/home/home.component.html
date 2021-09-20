@@ -1,8 +1,19 @@
-<div class="fullPage">
-    <div class="container">
-        <section class="main-section">
+<div class="fullPage mt-0">
+    <div class="container mt-0">
+        <section class="main-section mt-0">
+            <div class="row mt-0">
+                <div class="col-12">
+                    <p (click)="toggleFilters()">Filter&nbsp;<i [ngClass]="{'fas':true, 'fa-chevron-down':toggler==true?false:true, 'fa-chevron-up':toggler==true?true:false}"></i></p>
+                </div>
+            </div>
+            <div class="row" *ngIf="toggler==true">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-secondary  mb-2 mx-1" [ngClass]="{'active':filter.selected==true?true:false}" *ngFor=" let filter of filters" (click)="selectFilter(filter)">{{filter.name}}</button>
+                </div>
+            </div>
+            <hr>
             <div class="row">
-                <div class="col-4" *ngFor="let post of posts; let i as inde x">
+                <div class="col-4 mb-3" *ngFor="let post of posts; let i as index;">
                     <div class="card shadow">
                         <div class="card-title mb-0 mt-2">
                             <h5 class="mb-0 pl-2">{{post.userName}}</h5>
@@ -20,7 +31,7 @@
                         </div>
                         <div class="row mt-0">
                             <div class="col-12 mt-0">
-                                <span class="uil uil-heart pl-1" style="font-size: 30px;"></span>
+                                <span class=" fa-heart pl-1" style="font-size: 28px;" [ngClass]="{'text-danger':post.liked==true?true:false, 'fas':post.liked==true?true:false ,'far':post.liked==true?false:true }" (click)="liker(post.id)"></span>
                                 <span class="uil uil-share ml-1" style="font-size: 30px;"></span>
                             </div>
                         </div>

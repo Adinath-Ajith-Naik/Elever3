@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { MyCollectionsComponent } from './pages/my-collections/my-collections.co
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UploadImageComponent } from './pages/upload-image/upload-image.component';
 import { NavigationBarComponent } from './shared/layout/navigation-bar/navigation-bar.component';
+import { ViewImageComponent } from './pages/view-image/view-image.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { NavigationBarComponent } from './shared/layout/navigation-bar/navigatio
     LoginComponent,
     ProfileComponent,
     MyCollectionsComponent,
-    InfoComponent
+    InfoComponent,
+    ViewImageComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { NavigationBarComponent } from './shared/layout/navigation-bar/navigatio
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ModalModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CommonModule
 
   ],
   providers: [],
