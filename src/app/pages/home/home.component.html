@@ -12,8 +12,13 @@
                 </div>
             </div>
             <hr>
+            <div class="row mt-5" *ngIf="selectedPosts.length<1">
+                <div class="col-6 offset-3">
+                    <h3>No Results Found</h3>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-4 mb-3" *ngFor="let post of posts; let i as index;">
+                <div class="col-4 mb-3" *ngFor="let post of selectedPosts; let i as index;">
                     <div class="card shadow">
                         <div class="card-title mb-0 mt-2">
                             <h5 class="mb-0 pl-2">{{post.userName}}</h5>
@@ -29,7 +34,7 @@
                                 <span class="ml-1">{{post.caption}}</span>
                             </div>
                         </div>
-                        <div class="row mt-0">
+                        <div class="row mt-0" *ngIf="loginStatus=='true'">
                             <div class="col-12 mt-0">
                                 <span class=" fa-heart pl-1" style="font-size: 28px;" [ngClass]="{'text-danger':post.liked==true?true:false, 'fas':post.liked==true?true:false ,'far':post.liked==true?false:true }" (click)="liker(post.id)"></span>
                                 <span class="uil uil-share ml-1" style="font-size: 30px;"></span>
@@ -38,21 +43,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <img src="../../../assets/images/image3.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image16.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image14.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image5.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image6.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image7.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image8.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image6.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image10.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image11.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image12.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image13.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image15.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image14.jfif" height="200px" width="200px" class="m-2">
-            <img src="../../../assets/images/image2.jfif" height="200px" width="200px" class="m-2"> -->
         </section>
     </div>
 

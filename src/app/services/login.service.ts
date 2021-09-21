@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   userName: any = '';
   password: any = '';
-  constructor(
-    private router: Router,
-    private toast: ToastrService,
-  ) { }
+  loginDetails: string|null="";
+  constructor(private router: Router, private toast: ToastrService) {
+  }
 
-  logIn(values:any){
+  logIn(values: any) {
     this.userName = localStorage.getItem('username')
       ? localStorage.getItem('username')
       : 'mbcet';
@@ -24,28 +24,41 @@ export class LoginService {
     // this.password = formData.password;
     console.log(values);
     if ('mbcet' === values.userName && 'mbcet' === values.password) {
-      this.router.navigate(['/my-account']);
+      localStorage.setItem('username','mbcet');
       this.toast.success('Welcome ' + this.userName, 'Login Success!');
-      localStorage.setItem('login', 'true');
-      return true
+      this.LogInStatus("true");
+      this.router.navigate(['/my-account']);
+      return true;
     } else if (
       this.userName === values.userName &&
       this.password === values.password
     ) {
-      this.router.navigate(['/home']);
+      localStorage.setItem('username','user');
       this.toast.success('Welcome ' + this.userName, 'Login Success!');
-      return true
+      this.LogInStatus("true");
+      this.router.navigate(['/home']);
+      return true;
     } else if (
       values.userName === '' ||
       (values.userName === null && values.password === '') ||
       values.password === null
     ) {
       this.toast.error('Username or Password Cannot Be Empty', 'Login Failed!');
-      return false
+      this.LogInStatus("false");
+      return false;
     } else {
       this.toast.error('Incorrect Username and Password', 'Login Failed!');
-      return false
-
+      this.LogInStatus("false");
+      return false;
     }
+  }
+
+  LogInStatus(value:string) {
+    localStorage.setItem('login',value);
+  }
+
+  getLogInDetails():string|null{
+     this.loginDetails=localStorage.getItem('login');
+     return this.loginDetails;
   }
 }

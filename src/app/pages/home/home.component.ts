@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Filter } from 'src/app/Models/Filters/filters.model';
 import { Posts } from 'src/app/Models/posts/posts.model';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -9,139 +10,38 @@ import { Posts } from 'src/app/Models/posts/posts.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  loginStatus: string | null = '';
   posts: Posts[] = [] as Posts[];
+  selectedPosts: Posts[] = [] as Posts[];
   post: Posts = {} as Posts;
   liked: boolean = false;
   toggler: boolean = false;
-  filters: Filter[] = [
-    {
-      name: 'Aesthetic',
-      selected: false,
-    },
-    {
-      name: 'Cats',
-      selected: false,
-    },
-    {
-      name: 'Nature',
-      selected: false,
-    },
-    {
-      name: 'Birds',
-      selected: false,
-    },
-    {
-      name: 'Flowers',
-      selected: false,
-    },
-    {
-      name: 'Modeling',
-      selected: false,
-    },
-    {
-      name: 'Minimal',
-      selected: false,
-    },
-    {
-      name: 'Abstract',
-      selected: false,
-    },
-    {
-      name: 'Food',
-      selected: false,
-    },
-    {
-      name: 'Candid',
-      selected: false,
-    },
-  ];
+  filters: Filter[] | any = [] as Filter[];
   selectedFilter: string[] = [];
 
-  constructor(
-    
-  ) {
-    // this.post = {
-    //   userName: 'amalmohann',
-    //   imageUrl: '../../.../../../assets/images/image1.jfif',
-    //   location: 'Kozhikode',
-    //   tag: ['all'],
-    //   caption: 'wild and free',
-    //   likes: 10,
-    //   liked:false
-    // };
-
-    this.posts = [
-      {
-        id: 1,
-        userName: 'amalmohann',
-        imageUrl: '../../.../../../assets/images/image1.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'wild and free',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 2,
-        userName: 'adinath',
-        imageUrl: '../../.../../../assets/images/image2.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'live free',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 3,
-        userName: 'akhil',
-        imageUrl: '../../.../../../assets/images/image10.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'thanos',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 4,
-        userName: 'adarsh',
-        imageUrl: '../../.../../../assets/images/image15.jfif',
-        location: 'Banglore',
-        tag: ['all'],
-        caption: 'City ',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 5,
-        userName: 'Sarath',
-        imageUrl: '../../.../../../assets/images/image5.jfif',
-        location: 'Haripad',
-        tag: ['all'],
-        caption: 'Highness',
-        likes: 15,
-        liked: false,
-      },
-      {
-        id: 6,
-        userName: 'Albin',
-        imageUrl: '../../.../../../assets/images/image8.jfif',
-        location: 'Kottayam',
-        tag: ['all'],
-        caption: 'set ',
-        likes: 10,
-        liked: false,
-      },
-    ];
+  constructor(private logInService: LoginService) {
+    this.filters = localStorage.getItem('filters')? JSON.parse(localStorage.getItem('filters')!): [];
+    this.posts=localStorage.getItem('posts')?JSON.parse(localStorage.getItem('posts')!):[];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loginStatus = this.logInService.getLogInDetails();
+    this.selectedPosts = this.posts;
+  }
   liker(id: number) {
     this.liked = !this.liked;
     this.posts.forEach((post) => {
       if (post.id == id) {
         post.liked = !post.liked;
+        if (post.liked == true) {
+          post.likes += 1;
+        } else {
+          post.likes -= 1;
+        }
       }
     });
+    localStorage.setItem('posts',JSON.stringify(this.posts));
+
   }
 
   toggleFilters() {
@@ -150,5 +50,27 @@ export class HomeComponent implements OnInit {
 
   selectFilter(filter: Filter) {
     filter.selected = !filter.selected;
+    if (!filter.selected) {
+      this.selectedFilter.splice(this.selectedFilter.indexOf(filter.name), 1);
+    } else {
+      this.selectedFilter.push(filter.name);
+    }
+
+    if (
+      this.selectedFilter.length < 1 ||
+      !this.selectedFilter.length ||
+      !this.selectedFilter
+    ) {
+      this.selectedPosts = this.posts;
+    } else {
+      this.selectedPosts = [];
+      this.posts.map((post) => {
+        if (this.selectedFilter.includes(post.tag[0])) {
+          var tempPost: Posts = post;
+          this.selectedPosts.push(tempPost);
+          console.log();
+        }
+      });
+    }
   }
 }

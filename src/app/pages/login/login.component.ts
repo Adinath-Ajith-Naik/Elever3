@@ -27,7 +27,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    localStorage.setItem('username','user');
+
+  }
 
   signIn(formData: LoginData) {
     var login: boolean = this.loginService.logIn(formData);

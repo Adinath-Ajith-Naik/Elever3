@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { Filter } from 'src/app/Models/Filters/filters.model';
 import { Posts } from 'src/app/Models/posts/posts.model';
+import { LoginService } from 'src/app/services/login.service';
 import { UploadImageComponent } from '../upload-image/upload-image.component';
 import { ViewImageComponent } from '../view-image/view-image.component';
 
@@ -12,68 +16,22 @@ import { ViewImageComponent } from '../view-image/view-image.component';
 export class ProfileComponent implements OnInit {
   username: string | null = '';
   posts: Posts[] = [] as Posts[];
-  bsModalRef!:BsModalRef
-  uploadModalRef!:BsModalRef
+  bsModalRef!:BsModalRef;
+  uploadModalRef!:BsModalRef;
+  filters: Filter[] | any = [] as Filter[];
   
 
   constructor(
-  private bsModalService:BsModalService
+  private bsModalService:BsModalService,
+  private logInService:LoginService,
+  private router:Router,
+  private toast:ToastrService
+
   ) {
-    this.username = localStorage.getItem('username')
-      ? localStorage.getItem('username')
-      : null;
-    this.posts = [
-      {
-        id: 1,
-        userName: 'mbcet',
-        imageUrl: '../../.../../../assets/images/image1.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'wild and free',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 2,
-        userName: 'mbcet',
-        imageUrl: '../../.../../../assets/images/image2.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'live free',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 3,
-        userName: 'mbcet',
-        imageUrl: '../../.../../../assets/images/image10.jfif',
-        location: 'Kozhikode',
-        tag: ['all'],
-        caption: 'thanos',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 4,
-        userName: 'mbcet',
-        imageUrl: '../../.../../../assets/images/image15.jfif',
-        location: 'Banglore',
-        tag: ['all'],
-        caption: 'City ',
-        likes: 10,
-        liked: false,
-      },
-      {
-        id: 5,
-        userName: 'mbcet',
-        imageUrl: '../../.../../../assets/images/image5.jfif',
-        location: 'Haripad',
-        tag: ['all'],
-        caption: 'Highness',
-        likes: 15,
-        liked: false,
-      },
-    ];
+    this.username = localStorage.getItem('username')? localStorage.getItem('username'): null;
+      this.filters = localStorage.getItem('filters')? JSON.parse(localStorage.getItem('filters')!): [];
+    this.posts=localStorage.getItem('posts')?JSON.parse(localStorage.getItem('posts')!):[];
+
   }
 
   ngOnInit(): void {}
@@ -81,9 +39,14 @@ export class ProfileComponent implements OnInit {
     var initialState={
       post:post
     }
-    this.bsModalRef=this.bsModalService.show(ViewImageComponent,{initialState})
+    this.bsModalRef=this.bsModalService.show(ViewImageComponent,{initialState});
   }
   uploadImg(){
-    this.uploadModalRef=this.bsModalService.show(UploadImageComponent)
+    this.uploadModalRef=this.bsModalService.show(UploadImageComponent);
+  }
+  logOut(){
+    this.logInService.LogInStatus("false");
+    this.router.navigate(['/sign-in']);
+    this.toast.success("Logout Successful","Success")
   }
 }
