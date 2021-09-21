@@ -1,12 +1,37 @@
 <div class="modal-dialog modal-full-width">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 id="dialog-sizes-name1" class="modal-title pull-left">Upload</h4>
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">Add</h4>
             <button type="button" class="close pull-right" aria-label="Close">
           &times;</button>
         </div>
         <div class="modal-body">
+            <tabset class="tab-set-bg" [justified]=true active=active>
+                <tab heading="Upload Post">
+                    <form [formGroup]="uploadForm">
+                        <input class="form-control my-1" type="text" placeholder="User Name" formControlName="username">
+                        <input class="form-control my-1" type="text" placeholder="Location" formControlName="location">
+                        <input class="form-control my-1" type="text" placeholder="Caption" formControlName="caption">
+                        <select class="form-control my-1" placeholder="Tag" formControlName="tag">
+                            <option selected disabled>Category</option>
+                            <option value="{{filter.name}}" *ngFor="let filter of filters">{{filter.name}}</option>
+                          </select>
+                        <input id="img" class="form-control my-1" type="file" placeholder="Upload Image " formControlName="image">
+                        <button class="btn btn-success mt-2 " (click)="addPost(uploadForm.value) ">Upload</button>
 
+                    </form>
+                </tab>
+                <tab heading="Add Category ">
+                    <div class="row my-5 ">
+                        <div class="col-12 ">
+                            <form [formGroup]="categoryForm ">
+                                <input class="form-control " type="text " placeholder="Cateogory Name " formControlName="category">
+                                <button class="btn btn-success mt-2 " (click)="addCategory(categoryForm.value) ">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
         </div>
     </div>
 </div>

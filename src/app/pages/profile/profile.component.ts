@@ -49,4 +49,9 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/sign-in']);
     this.toast.success("Logout Successful","Success")
   }
+  deleteFilter(index:number){
+    this.filters.splice(index,1);
+    localStorage.setItem('filters',JSON.stringify(this.filters));
+  }
+  
 }

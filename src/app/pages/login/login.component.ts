@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private toast: ToastrService, // public signUpModalRef: BsModalRef
     private loginService: LoginService
   ) {
-    localStorage.setItem('login', 'login');
+    localStorage.setItem('login', 'false');
     this.loginForm = this.formBuilder.group({
       userName: '',
       password: '',

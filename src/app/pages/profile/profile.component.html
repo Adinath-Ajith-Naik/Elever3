@@ -10,21 +10,40 @@
         </div>
         <div class="profile-bio">
             <span>
-                Heyy, I'm a college student with a love for all things aesthetic. Dont forget to vote!
+                Hey There, I am using PIXEL! This is awesome and PIXEL IS Awsome
             </span>
         </div>
         <button class="btn profile-edit-btn mb-1" (click)="uploadImg()"> &nbsp;&nbsp;&nbsp;Add&nbsp;&nbsp;&nbsp;</button>
-        <button class="btn profile-edit-btn" (click)="logOut()"> Log Out</button>
+        <!-- <button class="btn profile-edit-btn" (click)="logOut()"> Log Out</button> -->
     </div>
 </div>
 <hr width="500" />
-
-<div class="gallery">
-    <div class="row">
-        <div class="col-3" *ngFor=" let post of posts">
-            <img [src]="post.imageUrl" *ngIf="username==post.userName" class="gallery_img" (click)="showImg(post)" />
-
+<tabset class="tab-set-bg" [justified]=true active=active>
+    <tab heading="Posts">
+        <div class="gallery">
+            <div class="row">
+                <div class="col-3" *ngFor=" let post of posts">
+                    <img [src]="post.imageUrl" *ngIf="username==post.userName" class="gallery_img" (click)="showImg(post)" />
+                </div>
+            </div>
         </div>
-    </div>
-
-</div>
+    </tab>
+    <tab heading="Categories">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let filter of filters; let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{filter.name}}</td>
+                    <td (click)="deleteFilter(i)"><i class="uil uil-trash text-danger"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </tab>
+</tabset>

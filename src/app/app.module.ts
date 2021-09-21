@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,8 @@ import { ViewImageComponent } from './pages/view-image/view-image.component';
     BrowserAnimationsModule,
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
-    CommonModule
+    CommonModule,
+    TabsModule
 
   ],
   providers: [],
