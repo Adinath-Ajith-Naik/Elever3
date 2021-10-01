@@ -53,5 +53,8 @@ export class ProfileComponent implements OnInit {
     this.filters.splice(index,1);
     localStorage.setItem('filters',JSON.stringify(this.filters));
   }
-  
+  DeletePost(index:number){
+    this.posts.splice(index,1);
+    localStorage.setItem('posts',JSON.stringify(this.posts));
+  }
 }

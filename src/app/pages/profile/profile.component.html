@@ -22,8 +22,9 @@
     <tab heading="Posts">
         <div class="gallery">
             <div class="row">
-                <div class="col-3" *ngFor=" let post of posts">
+                <div class="col-3" *ngFor=" let post of posts; let i=index;">
                     <img [src]="post.imageUrl" *ngIf="username==post.userName" class="gallery_img" (click)="showImg(post)" />
+                    <i class="uil uil-trash text-danger" (click)="DeletePost(i)"></i>
                 </div>
             </div>
         </div>

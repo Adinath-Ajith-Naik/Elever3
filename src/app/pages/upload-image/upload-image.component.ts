@@ -1,6 +1,9 @@
 import { getUrlScheme } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -20,7 +23,7 @@ export class UploadImageComponent implements OnInit {
   imageUrl: string = '';
   imageNotUploading: boolean = true;
   firebaseImageUrl: string = '';
-  task?:AngularFireUploadTask;
+  task?: AngularFireUploadTask;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,34 +62,40 @@ export class UploadImageComponent implements OnInit {
     this.uploadModalRef.hide();
   }
 
-  async uploadToFirebase() {
+  async addPost(values: any) {
     this.imageNotUploading = true;
     if (this.imageUrl && this.imageUrl !== '') {
-      this.task =   this.fireStorage.upload((this.posts.length + 1).toString(), this.imageUrl);
-      const ref = this.fireStorage.ref((this.posts.length + 1).toString());
+      this.task = this.fireStorage.upload(
+        (
+          this.posts.length +
+          1 +
+          Math.floor(Math.random() * 100 + 1)
+        ).toString(),
+        this.imageUrl
+      );
+      const ref = this.fireStorage.ref(
+        (this.posts.length + 1 + Math.floor(Math.random() * 100 + 1)).toString()
+      );
       await this.task;
-      this.firebaseImageUrl =await ref.getDownloadURL().toPromise();
+      this.firebaseImageUrl = await ref.getDownloadURL().toPromise();
     } else {
       alert('Please Add Image');
     }
-  }
-
-  addPost(values: any) {
-    this.uploadToFirebase();
-
     var post: Posts = {
       caption: values.caption,
       id: this.posts.length + 1,
       location: values.location,
       userName: values.username,
       tag: values.tag,
-      imageUrl: this.imageUrl,
+      imageUrl: this.firebaseImageUrl,
       liked: false,
       likes: 0,
     };
     console.log(post);
     this.posts.push(post);
     localStorage.setItem('posts', JSON.stringify(this.posts));
+    this.uploadModalRef.hide();
+    this.imageNotUploading = false;
   }
 
   uploadImage($event: any) {
