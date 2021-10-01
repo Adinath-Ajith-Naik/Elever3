@@ -16,7 +16,8 @@
                             <option selected disabled>Category</option>
                             <option value="{{filter.name}}" *ngFor="let filter of filters">{{filter.name}}</option>
                           </select>
-                        <input id="img" class="form-control my-1" type="file" placeholder="Upload Image " formControlName="image">
+                        <input id="img" class="form-control my-1" type="file" (change)="uploadImage($event)" placeholder="Upload Image " formControlName="image" accept="image/*">
+                        <!-- <input type="file" (change)="functionName()"> -->
                         <button class="btn btn-success mt-2 " (click)="addPost(uploadForm.value) ">Upload</button>
 
                     </form>

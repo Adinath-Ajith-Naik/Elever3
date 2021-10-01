@@ -16,7 +16,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { UploadImageComponent } from './pages/upload-image/upload-image.component';
 import { NavigationBarComponent } from './shared/layout/navigation-bar/navigation-bar.component';
 import { ViewImageComponent } from './pages/view-image/view-image.component';
-
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ViewImageComponent } from './pages/view-image/view-image.component';
     ProfileComponent,
     MyCollectionsComponent,
     InfoComponent,
-    ViewImageComponent
+    ViewImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,10 +39,19 @@ import { ViewImageComponent } from './pages/view-image/view-image.component';
     ModalModule.forRoot(),
     ToastrModule.forRoot(),
     CommonModule,
-    TabsModule
-
+    TabsModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp({
+      apiKey: 'AIzaSyAhm8bg2uE8oroeU8Yl1895VyhsfkBoeng',
+      authDomain: 'pixels-9239e.firebaseapp.com',
+      projectId: 'pixels-9239e',
+      storageBucket: 'pixels-9239e.appspot.com',
+      messagingSenderId: '776899529535',
+      appId: '1:776899529535:web:1f0f315f1cc885ae44a18a',
+      measurementId: 'G-SB3VJJTSF1',
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

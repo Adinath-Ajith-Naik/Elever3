@@ -1,6 +1,7 @@
+import { getUrlScheme } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Filter } from 'src/app/Models/Filters/filters.model';
@@ -16,15 +17,16 @@ export class UploadImageComponent implements OnInit {
   uploadForm: FormGroup;
   filters: Filter[] | any = [] as Filter[];
   posts: Posts[] | any = [] as Posts[];
-  fileSelected?: Blob;
-  imgUrl?: string;
-  base64: string = 'Base64...';
+  imageUrl: string = '';
+  imageNotUploading: boolean = true;
+  firebaseImageUrl: string = '';
+  task?:AngularFireUploadTask;
 
   constructor(
     private formBuilder: FormBuilder,
     private uploadModalRef: BsModalRef,
     private toast: ToastrService,
-    private sanitizer: DomSanitizer
+    private fireStorage: AngularFireStorage
   ) {
     this.categoryForm = this.formBuilder.group({
       category: '',
@@ -56,18 +58,38 @@ export class UploadImageComponent implements OnInit {
     this.toast.success('Category Created', 'Success');
     this.uploadModalRef.hide();
   }
+
+  async uploadToFirebase() {
+    this.imageNotUploading = true;
+    if (this.imageUrl && this.imageUrl !== '') {
+      this.task =   this.fireStorage.upload((this.posts.length + 1).toString(), this.imageUrl);
+      const ref = this.fireStorage.ref((this.posts.length + 1).toString());
+      await this.task;
+      this.firebaseImageUrl =await ref.getDownloadURL().toPromise();
+    } else {
+      alert('Please Add Image');
+    }
+  }
+
   addPost(values: any) {
+    this.uploadToFirebase();
+
     var post: Posts = {
       caption: values.caption,
-      id: Math.floor(Math.random() * 1000 + 1),
+      id: this.posts.length + 1,
       location: values.location,
       userName: values.username,
       tag: values.tag,
-      imageUrl: values.image,
+      imageUrl: this.imageUrl,
       liked: false,
       likes: 0,
     };
+    console.log(post);
     this.posts.push(post);
-    localStorage.setItem('posts',JSON.stringify(this.posts));
+    localStorage.setItem('posts', JSON.stringify(this.posts));
+  }
+
+  uploadImage($event: any) {
+    this.imageUrl = $event.target.files[0];
   }
 }
