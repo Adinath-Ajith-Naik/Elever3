@@ -16,45 +16,54 @@ import { ViewImageComponent } from '../view-image/view-image.component';
 export class ProfileComponent implements OnInit {
   username: string | null = '';
   posts: Posts[] = [] as Posts[];
-  bsModalRef!:BsModalRef;
-  uploadModalRef!:BsModalRef;
+  bsModalRef!: BsModalRef;
+  uploadModalRef!: BsModalRef;
   filters: Filter[] | any = [] as Filter[];
-  
 
   constructor(
-  private bsModalService:BsModalService,
-  private logInService:LoginService,
-  private router:Router,
-  private toast:ToastrService
-
+    private bsModalService: BsModalService,
+    private logInService: LoginService,
+    private router: Router,
+    private toast: ToastrService
   ) {
-    this.username = localStorage.getItem('username')? localStorage.getItem('username'): null;
-      this.filters = localStorage.getItem('filters')? JSON.parse(localStorage.getItem('filters')!): [];
-    this.posts=localStorage.getItem('posts')?JSON.parse(localStorage.getItem('posts')!):[];
-
+    this.username = localStorage.getItem('username')
+      ? localStorage.getItem('username')
+      : null;
+    this.filters = localStorage.getItem('filters')
+      ? JSON.parse(localStorage.getItem('filters')!)
+      : [];
+    this.posts = localStorage.getItem('posts')
+      ? JSON.parse(localStorage.getItem('posts')!)
+      : [];
   }
 
   ngOnInit(): void {}
-  showImg(post:Posts){
-    var initialState={
-      post:post
-    }
-    this.bsModalRef=this.bsModalService.show(ViewImageComponent,{initialState});
+  showImg(post: Posts) {
+    var initialState = {
+      post: post,
+    };
+    this.bsModalRef = this.bsModalService.show(ViewImageComponent, {
+      initialState,
+    });
   }
-  uploadImg(){
-    this.uploadModalRef=this.bsModalService.show(UploadImageComponent);
+  uploadImg() {
+    this.uploadModalRef = this.bsModalService.show(UploadImageComponent);
   }
-  logOut(){
-    this.logInService.LogInStatus("false");
+  logOut() {
+    this.logInService.LogInStatus('false');
     this.router.navigate(['/sign-in']);
-    this.toast.success("Logout Successful","Success")
+    this.toast.success('Logout Successful', 'Success');
   }
-  deleteFilter(index:number){
-    this.filters.splice(index,1);
-    localStorage.setItem('filters',JSON.stringify(this.filters));
+  deleteFilter(index: number) {
+    if (confirm('Are you sure to delete this filter??')) {
+      this.filters.splice(index, 1);
+      localStorage.setItem('filters', JSON.stringify(this.filters));
+    }
   }
-  DeletePost(index:number){
-    this.posts.splice(index,1);
-    localStorage.setItem('posts',JSON.stringify(this.posts));
+  DeletePost(index: number) {
+    if (confirm('Are Your sure?')) {
+      this.posts.splice(index, 1);
+      localStorage.setItem('posts', JSON.stringify(this.posts));
+    }
   }
 }

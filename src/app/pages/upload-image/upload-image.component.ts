@@ -68,25 +68,25 @@ export class UploadImageComponent implements OnInit {
       this.task = this.fireStorage.upload(
         (
           this.posts.length +
-          1 +
-          Math.floor(Math.random() * 100 + 1)
+          1 
         ).toString(),
         this.imageUrl
       );
       const ref = this.fireStorage.ref(
-        (this.posts.length + 1 + Math.floor(Math.random() * 100 + 1)).toString()
+        (this.posts.length + 1).toString()
       );
       await this.task;
       this.firebaseImageUrl = await ref.getDownloadURL().toPromise();
     } else {
       alert('Please Add Image');
     }
+    var tag : string[] = [values.tag];
     var post: Posts = {
       caption: values.caption,
       id: this.posts.length + 1,
       location: values.location,
       userName: values.username,
-      tag: values.tag,
+      tag: tag,
       imageUrl: this.firebaseImageUrl,
       liked: false,
       likes: 0,

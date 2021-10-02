@@ -16,5 +16,7 @@
         <!-- <a class="nav-item nav-link mr-0" (click)=SignInModal()>LogIn/SignUp</a> -->
         <button class="btn btn-round btn-warning mx-2" style="border-radius: 30px;" routerLink="/sign-in" *ngIf="(logInStatus=='info'||logInStatus=='home')&&(login!='true')">LogIn/SignUp</button>
         <a class="btn btn-round btn-warning mx-2" style="border-radius: 30px;" (click)="logOut()" *ngIf="login==='true'">Sign Out</a>
+        <a class="btn btn-round btn-warning mx-2" style="border-radius: 30px;" routerLink="/my-account" *ngIf="userName==='mbcet'">Profile</a>
+
     </div>
 </nav>
