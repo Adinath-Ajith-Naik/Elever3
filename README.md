@@ -1,11 +1,11 @@
-![Pixel](banner-camera.jpg)
-# Pixel Web App 
+![Pixels](banner-camera.jpg)
+# Pixels Web App 
 
 ![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-Pixel is a website for users to upload posts and like them. Users can login and add categories for the posts to filter them and view the posts easily. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1, with Google Firebase used as its back-end and hosted on Heroku. 
+Pixels is a website for users to upload posts and like them. Users can login and add categories for the posts to filter them and view the posts easily. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1, with Google Firebase used as its back-end and hosted on Heroku. 
 
 This project was developed, represnting IEEE MBCET CS SBC, for WebDez- Elever Competition organized by IEEE CS Kerala Chapter.
 
