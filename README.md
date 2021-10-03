@@ -5,9 +5,9 @@
 ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-This project was developed, represnting IEEE MBCET CS SBC, for WebDez- Elever Competition organized by IEEE CS Kerala Chapter. Pixel is a website for users to upload posts and like them. Users can login and add categories for the posts to filter them and view the posts easily. 
+Pixel is a website for users to upload posts and like them. Users can login and add categories for the posts to filter them and view the posts easily. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1, with Google Firebase used as its back-end and hosted on Heroku. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1, with Google Firebase used as its back-end and hosted on Heroku. 
+This project was developed, represnting IEEE MBCET CS SBC, for WebDez- Elever Competition organized by IEEE CS Kerala Chapter.
 
 ## How it Works?
 1. A login button on top right to get access as a user or an admin.
@@ -16,7 +16,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 4. A category filter is added on the page where the posts are displayed so that the viewer can filter the posts they see.
 
 
-## How to Configure
+## How to Configure?
 
 ### Development server
 
