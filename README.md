@@ -9,6 +9,8 @@ Pixels is a website for users to upload posts and like them. Users can login and
 
 This project was developed, represnting IEEE MBCET CS SBC, for WebDez- Elever Competition organized by IEEE CS Kerala Chapter.
 
+[![Website](https://img.shields.io/badge/View_site-Pixels-ffa500?style=for-the-badge)](https://pixels-elever.herokuapp.com/)
+
 ## How it Works?
 1. A login button on top right to get access as a user or an admin.
 2. An admin side to add new categories, new posts, and view votes received for each post.
