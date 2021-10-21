@@ -11,12 +11,14 @@ app.use(requireHTTPS);
 
 app.use(express.static('./dist/elever'));
 
+app.get('/healthCheck', (request, response) => {
+    response.status(200).send("<h2> Server is UP! Welcome to Health Check </h2>");
+})
+
 app.get('/*', function(req, res) {
     res.sendFile('index.html', { root: 'dist/elever/' });
 });
 
-app.get('/healthCheck', (request, response) => {
-    response.status(200).send("<h2> Server is UP! Welcome to Health Check </h2>");
-})
+
 
 app.listen(process.env.PORT || 8080);
